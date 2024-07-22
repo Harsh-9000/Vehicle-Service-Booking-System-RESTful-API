@@ -45,6 +45,25 @@ npm start
 
 The API should now be running on `http://localhost:3000` or whichever `PORT` number you used in `.env` file.
 
+## Docker Deployment
+To run the application using Docker:
+1. Build the Docker image:
+```sh
+docker-compose build
+```
+
+2. Start the application:
+```sh
+docker-compose up
+```
+
+5. The application should now be running and accessible at `http://localhost:3000`
+
+6. To stop the application, use:
+```sh
+docker-compose down
+```
+
 ## API Endpoints
 - POST /api/auth/register - Register a new user
 - POST /api/auth/login - Login and receive JWT token
