@@ -112,8 +112,6 @@ async function listBookings(req, res) {
             query.vehicleType = vehicleType;
         }
 
-        console.log(query);
-
         const bookings = await Booking.find(query);
 
         res.json(bookings);

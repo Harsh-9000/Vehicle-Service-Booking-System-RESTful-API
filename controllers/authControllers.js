@@ -33,7 +33,7 @@ async function registerUser(req, res) {
             maxAge: 86400000,
         })
 
-        return res.status(200).send({ message: 'User Registered.' })
+        return res.status(201).json({ token });
     } catch (error) {
         console.log('Error in /register route: ', error)
         res.status(500).send({ message: 'Something went wrong.' })
@@ -74,13 +74,30 @@ async function loginUser(req, res) {
             maxAge: 86400000,
         });
 
-        res.status(200).json({ userId: user._id });
+        res.status(200).json({ token });
     } catch (error) {
         console.log('Error in /login route: ', error)
         res.status(500).json({ message: 'Something went wrong.' })
     }
 }
 
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: Logout a user
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User logged out successfully
+ *       401:
+ *         description: Unauthorized - User not logged in
+ *     description: |
+ *       This endpoint logs out the current user by clearing the auth_token cookie.
+ *       It requires the user to be authenticated (bearer token should be provided).
+ */
 function logoutUser(req, res) {
     res.cookie('auth_token', '', {
         expires: new Date(0),

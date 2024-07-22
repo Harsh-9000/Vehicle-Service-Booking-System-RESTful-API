@@ -7,6 +7,7 @@ import connectDB from "./config/connectDB.js"
 import authRoutes from "./routes/authRoutes.js"
 import bookingRoutes from "./routes/bookingRoutes.js"
 import rateLimiter from "./middleware/rateLimiter.js";
+import { swaggerUi, specs } from "./swagger.js";
 
 const app = express();
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use(rateLimiter);
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use('/api/auth', authRoutes);
 app.use('/api/bookings', bookingRoutes);
 
